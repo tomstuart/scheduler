@@ -1,3 +1,5 @@
+require 'calendar'
+
 class Scheduler
   attr_accessor :start_time, :end_time
 

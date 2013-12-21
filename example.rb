@@ -1,4 +1,5 @@
 require 'scheduler'
+require 'date'
 
 start_time = DateTime.new(2013, 12, 2, 0, 0)
 end_time = DateTime.new(2013, 12, 8, 23, 59, 59)
