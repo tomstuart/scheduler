@@ -10,9 +10,9 @@ class PeriodGroup
     results = []
 
     while i < n
-      start_offset = (i * (periods.length / n)).round
-      end_offset = ((i + 1) * (periods.length / n)).round
-      results << PeriodGroup.new(periods.slice(start_offset..end_offset))
+      start_offset = (i * (periods.length.to_f / n)).round
+      end_offset = ((i + 1) * (periods.length.to_f / n)).round
+      results << PeriodGroup.new(periods.slice(start_offset...end_offset))
       i += 1
     end
 

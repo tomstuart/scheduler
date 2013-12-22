@@ -68,6 +68,34 @@ describe PeriodGroup do
         end
       end
     end
+
+    context 'when there are eleven periods' do
+      let(:periods) { 11.times.map { |n| double("period #{n}") } }
+
+      context 'when splitting into three' do
+        it 'should return three period groups' do
+          subject.split_into(3).should have(3).period_groups
+        end
+
+        [0, 1, 2, 3].each do |n|
+          specify "the first period group should contain period #{n}" do
+            subject.split_into(3)[0].should include(periods[n])
+          end
+        end
+
+        [4, 5, 6].each do |n|
+          specify "the second period group should contain period #{n}" do
+            subject.split_into(3)[1].should include(periods[n])
+          end
+        end
+
+        [7, 8, 9, 10].each do |n|
+          specify "the third period group should contain period #{n}" do
+            subject.split_into(3)[2].should include(periods[n])
+          end
+        end
+      end
+    end
   end
 
   describe '#include?' do
