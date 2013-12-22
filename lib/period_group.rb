@@ -5,7 +5,8 @@ class PeriodGroup < Struct.new(:periods)
     (0..number_of_pieces).
       map { |piece_number| (piece_number * ideal_piece_size).round }.
       each_cons(2).
-      map { |piece_offset, next_piece_offset| PeriodGroup.new(periods.slice(piece_offset...next_piece_offset)) }
+      map { |piece_offset, next_piece_offset| piece_offset...next_piece_offset }.
+      map { |piece_range| PeriodGroup.new(periods.slice(piece_range)) }
   end
 
   def include?(period)
