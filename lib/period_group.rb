@@ -18,7 +18,7 @@ class PeriodGroup
   end
 
   def random_time
-    period = periods.first
+    period = periods.sample
     duration = period.end_time - period.start_time
     period.start_time + rand(duration)
   end

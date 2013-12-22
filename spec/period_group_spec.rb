@@ -190,6 +190,17 @@ describe PeriodGroup do
       it 'should return a different time every time' do
         subject.random_time.should_not == subject.random_time
       end
+
+      it 'should not always pick the same period' do
+        picked_periods = []
+
+        100.times do
+          time = subject.random_time
+          picked_periods << periods.select { |period| time.between?(period.start_time, period.end_time) }
+        end
+
+        picked_periods.uniq.should have_at_least(2).periods
+      end
     end
   end
 end
