@@ -12,22 +12,60 @@ describe PeriodGroup do
   end
 
   describe '#split_into' do
-    context 'when splitting into two' do
+    subject { PeriodGroup.new(periods) }
+
+    context 'when there are two periods' do
       let(:first_period) { double('first period') }
       let(:second_period) { double('second period') }
       let(:periods) { [first_period, second_period] }
-      subject { PeriodGroup.new(periods) }
 
-      it 'should return two period groups' do
-        subject.split_into(2).should have(2).period_groups
+      context 'when splitting into two' do
+        it 'should return two period groups' do
+          subject.split_into(2).should have(2).period_groups
+        end
+
+        specify 'the first period group should contain the first period' do
+          subject.split_into(2)[0].should include(first_period)
+        end
+
+        specify 'the second period group should contain the second period' do
+          subject.split_into(2)[1].should include(second_period)
+        end
       end
+    end
 
-      specify 'the first period group should contain the first period' do
-        subject.split_into(2)[0].should include(first_period)
-      end
+    context 'when there are five periods' do
+      let(:first_period) { double('first period') }
+      let(:second_period) { double('second period') }
+      let(:third_period) { double('third period') }
+      let(:fourth_period) { double('fourth period') }
+      let(:fifth_period) { double('fifth period') }
+      let(:periods) { [first_period, second_period, third_period, fourth_period, fifth_period] }
 
-      specify 'the second period group should contain the second period' do
-        subject.split_into(2)[1].should include(second_period)
+      context 'when splitting into two' do
+        it 'should return two period groups' do
+          subject.split_into(2).should have(2).period_groups
+        end
+
+        specify 'the first period group should contain the first period' do
+          subject.split_into(2)[0].should include(first_period)
+        end
+
+        specify 'the first period group should contain the second period' do
+          subject.split_into(2)[0].should include(second_period)
+        end
+
+        specify 'the first period group should contain the third period' do
+          subject.split_into(2)[0].should include(third_period)
+        end
+
+        specify 'the second period group should contain the fourth period' do
+          subject.split_into(2)[1].should include(fourth_period)
+        end
+
+        specify 'the second period group should contain the fifth period' do
+          subject.split_into(2)[1].should include(fifth_period)
+        end
       end
     end
   end
