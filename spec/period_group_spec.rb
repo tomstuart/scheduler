@@ -19,6 +19,20 @@ describe PeriodGroup do
       let(:second_period) { double('second period') }
       let(:periods) { [first_period, second_period] }
 
+      context 'when splitting into one' do
+        it 'should return one period group' do
+          subject.split_into(1).should have(1).period_group
+        end
+
+        specify 'the first period group should contain the first period' do
+          subject.split_into(1)[0].should include(first_period)
+        end
+
+        specify 'the first period group should contain the second period' do
+          subject.split_into(1)[0].should include(second_period)
+        end
+      end
+
       context 'when splitting into two' do
         it 'should return two period groups' do
           subject.split_into(2).should have(2).period_groups
@@ -65,6 +79,32 @@ describe PeriodGroup do
 
         specify 'the second period group should contain the fifth period' do
           subject.split_into(2)[1].should include(fifth_period)
+        end
+      end
+
+      context 'when splitting into five' do
+        it 'should return five period groups' do
+          subject.split_into(5).should have(5).period_groups
+        end
+
+        specify 'the first period group should contain the first period' do
+          subject.split_into(5)[0].should include(first_period)
+        end
+
+        specify 'the second period group should contain the second period' do
+          subject.split_into(5)[1].should include(second_period)
+        end
+
+        specify 'the third period group should contain the third period' do
+          subject.split_into(5)[2].should include(third_period)
+        end
+
+        specify 'the fourth period group should contain the fourth period' do
+          subject.split_into(5)[3].should include(fourth_period)
+        end
+
+        specify 'the fifth period group should contain the fifth period' do
+          subject.split_into(5)[4].should include(fifth_period)
         end
       end
     end
