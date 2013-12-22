@@ -3,16 +3,9 @@ require 'active_support/core_ext'
 require 'period'
 require 'period_group'
 
-class Calendar
+class Calendar < Struct.new(:start_time, :end_time)
   START_HOUR = 9
   END_HOUR = 17
-
-  attr_accessor :start_time, :end_time
-
-  def initialize(start_time, end_time)
-    self.start_time = start_time
-    self.end_time = end_time
-  end
 
   def periods
     periods = []
