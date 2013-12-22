@@ -1,9 +1,9 @@
 class PeriodGroup < Struct.new(:periods)
-  def split_into(n)
-    (0..n).
-      map { |i| (i * (periods.length.to_f / n)).round }.
+  def split_into(number_of_pieces)
+    (0..number_of_pieces).
+      map { |piece_number| (piece_number * (periods.length.to_f / number_of_pieces)).round }.
       each_cons(2).
-      map { |first, last| PeriodGroup.new(periods.slice(first...last)) }
+      map { |piece_offset, next_piece_offset| PeriodGroup.new(periods.slice(piece_offset...next_piece_offset)) }
   end
 
   def include?(period)
