@@ -12,8 +12,6 @@ class PeriodGroup < Struct.new(:periods)
   end
 
   def random_time
-    period = periods.sample
-    duration = period.end_time - period.start_time
-    period.start_time + rand(duration)
+    periods.sample.random_time
   end
 end

@@ -27,4 +27,18 @@ describe Period do
 
     its(:end_time) { should == end_time }
   end
+
+  describe '#random_time' do
+    let(:start_time) { Time.local(2013, 12, 2, 9, 0) }
+    let(:end_time) { Time.local(2013, 12, 2, 17, 0) }
+    subject { Period.new(start_time, end_time) }
+
+    it 'should return a time within the period' do
+      subject.random_time.should be_between(start_time, end_time)
+    end
+
+    it 'should return a different time every time' do
+      subject.random_time.should_not == subject.random_time
+    end
+  end
 end

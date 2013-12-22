@@ -151,8 +151,12 @@ describe PeriodGroup do
     context 'when the group has one period' do
       let(:start_time) { Time.local(2013, 12, 2, 9, 0) }
       let(:end_time) { Time.local(2013, 12, 2, 17, 0) }
-      let(:period) { double('period', start_time: start_time, end_time: end_time) }
+      let(:period) { double('period') }
       subject { PeriodGroup.new([period]) }
+
+      before(:each) do
+        period.stub(:random_time).and_return(Time.local(2013, 12, 2, 10, 0), Time.local(2013, 12, 2, 14, 0))
+      end
 
       it 'should return a Time' do
         subject.random_time.should be_a(Time)
@@ -172,7 +176,9 @@ describe PeriodGroup do
         10.times.map { |n|
           start_time = Time.local(2013, 12, 2, 9, 0) + n.days
           end_time = Time.local(2013, 12, 2, 17, 0) + n.days
-          double("period #{n}", start_time: start_time, end_time: end_time)
+          period = double("period #{n}", start_time: start_time, end_time: end_time)
+          period.stub(:random_time).and_return(start_time + 2.hours, start_time + 6.hours)
+          period
         }
       }
 
