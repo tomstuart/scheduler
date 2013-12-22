@@ -12,6 +12,14 @@ describe Period do
     end
   end
 
+  describe '#start_time' do
+    let(:start_time) { double('start time') }
+    let(:end_time) { double('end time') }
+    subject { Period.new(start_time, end_time) }
+
+    its(:start_time) { should == start_time }
+  end
+
   describe '#end_time' do
     let(:start_time) { double('start time') }
     let(:end_time) { double('end time') }
