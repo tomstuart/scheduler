@@ -6,17 +6,11 @@ class PeriodGroup
   end
 
   def split_into(n)
-    i = 0
-    results = []
-
-    while i < n
+    (0...n).map do |i|
       start_offset = (i * (periods.length.to_f / n)).round
       end_offset = ((i + 1) * (periods.length.to_f / n)).round
-      results << PeriodGroup.new(periods.slice(start_offset...end_offset))
-      i += 1
+      PeriodGroup.new(periods.slice(start_offset...end_offset))
     end
-
-    results
   end
 
   def include?(period)
