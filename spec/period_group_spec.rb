@@ -12,7 +12,7 @@ describe PeriodGroup do
   end
 
   describe '#split_into' do
-    subject { PeriodGroup.new(periods) }
+    let(:period_group) { PeriodGroup.new(periods) }
 
     context 'when there are two periods' do
       let(:first_period) { double('first period') }
@@ -20,30 +20,30 @@ describe PeriodGroup do
       let(:periods) { [first_period, second_period] }
 
       context 'when splitting into one' do
-        it 'should return one period group' do
-          subject.split_into(1).should have(1).period_group
-        end
+        subject { period_group.split_into(1) }
+
+        it { should have(1).period_group }
 
         specify 'the first period group should contain the first period' do
-          subject.split_into(1)[0].should include(first_period)
+          subject[0].should include(first_period)
         end
 
         specify 'the first period group should contain the second period' do
-          subject.split_into(1)[0].should include(second_period)
+          subject[0].should include(second_period)
         end
       end
 
       context 'when splitting into two' do
-        it 'should return two period groups' do
-          subject.split_into(2).should have(2).period_groups
-        end
+        subject { period_group.split_into(2) }
+
+        it { should have(2).period_groups }
 
         specify 'the first period group should contain the first period' do
-          subject.split_into(2)[0].should include(first_period)
+          subject[0].should include(first_period)
         end
 
         specify 'the second period group should contain the second period' do
-          subject.split_into(2)[1].should include(second_period)
+          subject[1].should include(second_period)
         end
       end
     end
@@ -57,54 +57,54 @@ describe PeriodGroup do
       let(:periods) { [first_period, second_period, third_period, fourth_period, fifth_period] }
 
       context 'when splitting into two' do
-        it 'should return two period groups' do
-          subject.split_into(2).should have(2).period_groups
-        end
+        subject { period_group.split_into(2) }
+
+        it { should have(2).period_groups }
 
         specify 'the first period group should contain the first period' do
-          subject.split_into(2)[0].should include(first_period)
+          subject[0].should include(first_period)
         end
 
         specify 'the first period group should contain the second period' do
-          subject.split_into(2)[0].should include(second_period)
+          subject[0].should include(second_period)
         end
 
         specify 'the first period group should contain the third period' do
-          subject.split_into(2)[0].should include(third_period)
+          subject[0].should include(third_period)
         end
 
         specify 'the second period group should contain the fourth period' do
-          subject.split_into(2)[1].should include(fourth_period)
+          subject[1].should include(fourth_period)
         end
 
         specify 'the second period group should contain the fifth period' do
-          subject.split_into(2)[1].should include(fifth_period)
+          subject[1].should include(fifth_period)
         end
       end
 
       context 'when splitting into five' do
-        it 'should return five period groups' do
-          subject.split_into(5).should have(5).period_groups
-        end
+        subject { period_group.split_into(5) }
+
+        it { should have(5).period_groups }
 
         specify 'the first period group should contain the first period' do
-          subject.split_into(5)[0].should include(first_period)
+          subject[0].should include(first_period)
         end
 
         specify 'the second period group should contain the second period' do
-          subject.split_into(5)[1].should include(second_period)
+          subject[1].should include(second_period)
         end
 
         specify 'the third period group should contain the third period' do
-          subject.split_into(5)[2].should include(third_period)
+          subject[2].should include(third_period)
         end
 
         specify 'the fourth period group should contain the fourth period' do
-          subject.split_into(5)[3].should include(fourth_period)
+          subject[3].should include(fourth_period)
         end
 
         specify 'the fifth period group should contain the fifth period' do
-          subject.split_into(5)[4].should include(fifth_period)
+          subject[4].should include(fifth_period)
         end
       end
     end
@@ -113,25 +113,25 @@ describe PeriodGroup do
       let(:periods) { 11.times.map { |n| double("period #{n}") } }
 
       context 'when splitting into three' do
-        it 'should return three period groups' do
-          subject.split_into(3).should have(3).period_groups
-        end
+        subject { period_group.split_into(3) }
+
+        it { should have(3).period_groups }
 
         [0, 1, 2, 3].each do |n|
           specify "the first period group should contain period #{n}" do
-            subject.split_into(3)[0].should include(periods[n])
+            subject[0].should include(periods[n])
           end
         end
 
         [4, 5, 6].each do |n|
           specify "the second period group should contain period #{n}" do
-            subject.split_into(3)[1].should include(periods[n])
+            subject[1].should include(periods[n])
           end
         end
 
         [7, 8, 9, 10].each do |n|
           specify "the third period group should contain period #{n}" do
-            subject.split_into(3)[2].should include(periods[n])
+            subject[2].should include(periods[n])
           end
         end
       end
