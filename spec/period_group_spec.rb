@@ -10,4 +10,13 @@ describe PeriodGroup do
       -> { PeriodGroup.new(periods) }.should_not raise_error
     end
   end
+
+  describe '#split_into' do
+    let(:periods) { [double('first period'), double('second period')] }
+    subject { PeriodGroup.new(periods) }
+
+    it 'should return two period groups' do
+      subject.split_into(2).should have(2).period_groups
+    end
+  end
 end
