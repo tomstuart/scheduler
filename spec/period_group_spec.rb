@@ -12,11 +12,23 @@ describe PeriodGroup do
   end
 
   describe '#split_into' do
-    let(:periods) { [double('first period'), double('second period')] }
-    subject { PeriodGroup.new(periods) }
+    context 'when splitting into two' do
+      let(:first_period) { double('first period') }
+      let(:second_period) { double('second period') }
+      let(:periods) { [first_period, second_period] }
+      subject { PeriodGroup.new(periods) }
 
-    it 'should return two period groups' do
-      subject.split_into(2).should have(2).period_groups
+      it 'should return two period groups' do
+        subject.split_into(2).should have(2).period_groups
+      end
+
+      specify 'the first period group should contain the first period' do
+        subject.split_into(2)[0].should include(first_period)
+      end
+
+      specify 'the second period group should contain the second period' do
+        subject.split_into(2)[1].should include(second_period)
+      end
     end
   end
 

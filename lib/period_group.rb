@@ -6,7 +6,7 @@ class PeriodGroup
   end
 
   def split_into(n)
-    [PeriodGroup.new([]), PeriodGroup.new([])]
+    [PeriodGroup.new([periods.first]), PeriodGroup.new([periods.last])]
   end
 
   def include?(period)
