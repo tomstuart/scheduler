@@ -161,6 +161,10 @@ describe PeriodGroup do
       it 'should return a time within the period' do
         subject.random_time.should be_between(start_time, end_time)
       end
+
+      it 'should return a different time every time' do
+        subject.random_time.should_not == subject.random_time
+      end
     end
   end
 end
