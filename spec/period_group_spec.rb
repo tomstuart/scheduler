@@ -166,5 +166,30 @@ describe PeriodGroup do
         subject.random_time.should_not == subject.random_time
       end
     end
+
+    context 'when the group has many periods' do
+      let(:periods) {
+        10.times.map { |n|
+          start_time = Time.local(2013, 12, 2, 9, 0) + n.days
+          end_time = Time.local(2013, 12, 2, 17, 0) + n.days
+          double("period #{n}", start_time: start_time, end_time: end_time)
+        }
+      }
+
+      subject { PeriodGroup.new(periods) }
+
+      it 'should return a Time' do
+        subject.random_time.should be_a(Time)
+      end
+
+      it 'should return a time within one of the periods' do
+        time = subject.random_time
+        periods.select { |period| time.between?(period.start_time, period.end_time) }.should have(1).period
+      end
+
+      it 'should return a different time every time' do
+        subject.random_time.should_not == subject.random_time
+      end
+    end
   end
 end
