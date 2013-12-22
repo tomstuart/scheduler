@@ -19,4 +19,13 @@ describe PeriodGroup do
       subject.split_into(2).should have(2).period_groups
     end
   end
+
+  describe '#include?' do
+    let(:period) { double('period') }
+    let(:another_period) { double('another period') }
+    subject { PeriodGroup.new([period]) }
+
+    it { should include(period) }
+    it { should_not include(another_period) }
+  end
 end
