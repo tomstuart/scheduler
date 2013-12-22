@@ -1,5 +1,8 @@
 require 'active_support/core_ext'
 
+require 'period'
+require 'period_group'
+
 class Calendar
   START_HOUR = 9
   END_HOUR = 17
