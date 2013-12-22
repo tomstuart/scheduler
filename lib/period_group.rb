@@ -16,4 +16,8 @@ class PeriodGroup
   def include?(period)
     periods.include?(period)
   end
+
+  def random_time
+    DateTime.new
+  end
 end

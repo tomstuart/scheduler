@@ -146,4 +146,15 @@ describe PeriodGroup do
     it { should include(period) }
     it { should_not include(another_period) }
   end
+
+  describe '#random_time' do
+    context 'when the group has one period' do
+      let(:period) { double('period') }
+      subject { PeriodGroup.new([period]) }
+
+      it 'should return a DateTime' do
+        subject.random_time.should be_a(DateTime)
+      end
+    end
+  end
 end
