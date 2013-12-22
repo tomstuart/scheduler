@@ -18,6 +18,6 @@ class PeriodGroup
   end
 
   def random_time
-    DateTime.new
+    Time.new
   end
 end

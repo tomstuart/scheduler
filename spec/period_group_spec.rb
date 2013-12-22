@@ -152,8 +152,8 @@ describe PeriodGroup do
       let(:period) { double('period') }
       subject { PeriodGroup.new([period]) }
 
-      it 'should return a DateTime' do
-        subject.random_time.should be_a(DateTime)
+      it 'should return a Time' do
+        subject.random_time.should be_a(Time)
       end
     end
   end
