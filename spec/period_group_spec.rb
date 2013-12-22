@@ -149,11 +149,17 @@ describe PeriodGroup do
 
   describe '#random_time' do
     context 'when the group has one period' do
-      let(:period) { double('period') }
+      let(:start_time) { Time.local(2013, 12, 2, 9, 0) }
+      let(:end_time) { Time.local(2013, 12, 2, 17, 0) }
+      let(:period) { double('period', start_time: start_time, end_time: end_time) }
       subject { PeriodGroup.new([period]) }
 
       it 'should return a Time' do
         subject.random_time.should be_a(Time)
+      end
+
+      it 'should return a time within the period' do
+        subject.random_time.should be_between(start_time, end_time)
       end
     end
   end

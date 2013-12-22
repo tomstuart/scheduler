@@ -18,6 +18,7 @@ class PeriodGroup
   end
 
   def random_time
-    Time.new
+    period = periods.first
+    period.start_time
   end
 end
