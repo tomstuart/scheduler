@@ -8,7 +8,7 @@ class Scheduler
     self.end_time = end_time
   end
 
-  def two_times
+  def pick_times(n)
     calendar = Calendar.new(start_time, end_time)
     all_periods = calendar.periods
 
