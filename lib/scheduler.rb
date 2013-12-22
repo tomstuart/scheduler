@@ -9,13 +9,6 @@ class Scheduler
   end
 
   def pick_times(n)
-    calendar = Calendar.new(start_time, end_time)
-    all_periods = calendar.periods
-
-    first_half_periods, second_half_periods = all_periods.split_into(2)
-    first_time = first_half_periods.random_time
-    second_time = second_half_periods.random_time
-
-    [first_time, second_time]
+    Calendar.new(start_time, end_time).periods.split_into(n).map(&:random_time)
   end
 end
